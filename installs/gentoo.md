@@ -77,6 +77,7 @@ INPUT_DEVICES="libinput"
 # You can generate the exact string later using 'app-portage/cpuid2cpuflags'
 #CPU_FLAGS_X86="aes avx avx2 f16c fma3 mmx mmxext pclmul popcnt rdrand sha sse sse2 sse3 sse4_1 sse4_2 ssse3"
 LC_MESSAGES=C.UTF-8
+GRUB_PLATFORMS="efi-64"
 ```
 
 Ensure networking works:
@@ -164,13 +165,6 @@ And install base system:
 emerge -vauDN @world
 ```
 
-Install text editor for easier time (I love nvim):
-
-```
-emerge -q neovim
-emerge --sync
-```
-
 ## Install the kernel
 
 Group license compliance for firmware and define the kernel layout infrastructure explicitly:
@@ -184,8 +178,29 @@ echo "sys-kernel/installkernel dracut" > /etc/portage/package.use/kernel
 Install firmware stacks and the pre-compiled kernel in one single transaction
 
 ```bash
-emerge -q sys-kernel/linux-firmware sys-firmware/sof-firmware sys-kernel/installkernel sys-kernel/gentoo-kernel-bin
+emerge -q sys-kernel/linux-firmware sys-firmware/sof-firmware sys-kernel/installkernel sys-kernel/gentoo-kernel-bin neovim
 ```
+
+Set up user session stuff:
+
+```bash
+echo "net-misc/networkmanager -iwd wifi" >> /etc/portage/package.use/networkmanager
+echo -e "media-video/pipewire sound-server pipewire-alsa pulseaudio\nmedia-sound/pulseaudio -daemon" >> /etc/portage/package.use/audio
+echo "app-i18n/fcitx-unikey ~amd64" >> /etc/portage/package.accept_keywords/fcitx-unikey
+echo "media-video/obs-studio ~amd64" >> /etc/portage/package.accept_keywords/obs
+```
+
+```bash
+emerge -q networkmanager wpa_supplicant sys-apps/dbus elogind dev-vcs/git fastfetch media-video/pipewire media-video/wireplumber sys-auth/polkit x11-base/xorg-drivers x11-drivers/nvidia-drivers x11-base/xorg-server x11-apps/xrandr xdg-utils cwm flameshot slock x11-misc/xclip xdg-desktop-portal-gtk fcitx fcitx-configtool fcitx-gtk fcitx-unikey doas light sys-apps/lm-sensors playerctl app-containers/podman pulsemixer tailscale p7zip unrar unzip zip imv mpv obs-studio firefox-bin fish ghostty sys-boot/grub efibootmgr
+```
+
+```bash
+rc-update add NetworkManager default
+rc-update add dbus default
+rc-update add elogind boot
+```
+
+( You can launch audio with `gentoo-pipewire-launcher` script)
 
 ## Generate fstab
 
@@ -214,26 +229,6 @@ nvim /etc/hosts
 ::1             localhost serein
 ```
 
-Set up user session stuff:
-
-```bash
-echo "net-misc/networkmanager -iwd wifi" >> /etc/portage/package.use/networkmanager
-echo -e "media-video/pipewire sound-server pipewire-alsa pulseaudio\nmedia-sound/pulseaudio -daemon" >> /etc/portage/package.use/audio
-echo "app-i18n/fcitx-unikey ~amd64" >> /etc/portage/package.accept_keywords/fcitx-unikey
-```
-
-```bash
-emerge -q networkmanager wpa_supplicant sys-apps/dbus elogind dev-vcs/git fastfetch media-video/pipewire media-video/wireplumber sys-auth/polkit x11-base/xorg-drivers x11-drivers/nvidia-drivers x11-base/xorg-server x11-apps/xrandr xdg-utils cwm flameshot slock x11-misc/xclip xdg-desktop-portal-gtk fcitx fcitx-configtool fcitx-gtk fcitx-unikey
-```
-
-```bash
-rc-update add NetworkManager default
-rc-update add dbus default
-rc-update add elogind boot
-```
-
-( You can launch audio with `gentoo-pipewire-launcher` script)
-
 Set root password:
 
 ```
@@ -250,21 +245,12 @@ passwd nixuris
 Set up other tools:
 
 ```bash
-echo "media-video/obs-studio ~amd64" >> /etc/portage/package.accept_keywords/obs
 ```
 
 ```
-emerge -q doas light sys-apps/lm-sensors playerctl app-containers/podman pulsemixer tailscale p7zip unrar unzip zip imv mpv obs-studio firefox-bin fish ghostty
 echo "permit persist keepenv :wheel" > /etc/doas.conf
 chsh -s $(which fish)
 chsh -s $(which fish) nixuris
-```
-
-Set up GRUB:
-
-```
-echo 'GRUB_PLATFORMS="efi-64"' >> /etc/portage/make.conf
-emerge -q sys-boot/grub efibootmgr
 ```
 
 Add this to /etc/default/grub:
@@ -286,6 +272,8 @@ Exit chroot:
 exit
 umount -R /mnt/gentoo
 ```
+
+## POST INSTALL
 
 GURU PKGS:
 
