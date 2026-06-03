@@ -1,6 +1,7 @@
 ## Gentoo installation
 
 # Warm up!
+
 This guide assume you use GUI live cd
 
 First change gentoo password:
@@ -13,6 +14,7 @@ passwd gentoo
 Go to kde settings and set correct time and date.
 
 # Paritioning
+
 Partition the disk with cfdisk!
 
 Format the unified Boot/ESP partition (Give it 1GB or 2GB to hold kernels comfortably):
@@ -41,13 +43,13 @@ Go to download section then pick the first option (stage 3 openrc):
 Then press enter, save it, then unpack:
 
 ```
-tar xpvf stage3-*.tar.xz --xattrs-include='*.*' --numeric-owner -C /mnt/gentoo
+tar xpvf stage3-*.tar.xz --xattrs-include='*.*' --numeric-owner
 ```
 
 Now we edit the make.conf file:
 
 ```
-vim /mnt/gentoo/etc/portage/make.conf
+vim etc/portage/make.conf
 ```
 
 ```
@@ -57,7 +59,7 @@ CXXFLAGS="${COMMON_FLAGS}"
 FCFLAGS="${COMMON_FLAGS}"
 FFLAGS="${COMMON_FLAGS}"
 # Enable the official Gentoo binary repository
-EMERGE_DEFAULT_OPTS="${EMERGE_DEFAULT_OPTS} --usepkg=y --getbinpkg=y"
+EMERGE_DEFAULT_OPTS="${EMERGE_DEFAULT_OPTS} --usepkg=y --getbinpkg=y --binpkg-respect-use=y"
 FEATURES="${FEATURES} getbinpkg"
 BINPKG_FORMAT="gpkg"
 MAKEOPTS="-j16 -l14"
@@ -75,7 +77,7 @@ LC_MESSAGES=C.UTF-8
 Ensure networking works:
 
 ```
-cp --dereference /etc/resolv.conf /mnt/gentoo/etc/
+cp --dereference /etc/resolv.conf etc/
 ```
 
 # Chroot
@@ -83,49 +85,24 @@ cp --dereference /etc/resolv.conf /mnt/gentoo/etc/
 Mounting the fs:
 
 ```
-mount --types proc /proc /mnt/gentoo/proc 
-mount --rbind /sys /mnt/gentoo/sys
-mount --make-rslave /mnt/gentoo/sys
-mount --rbind /dev /mnt/gentoo/dev
-mount --make-rslave /mnt/gentoo/dev
-mount --bind /run /mnt/gentoo/run
-mount --make-slave /mnt/gentoo/run
+mount --types proc /proc proc 
+mount --rbind /sys sys
+mount --make-rslave sys
+mount --rbind /dev dev
+mount --make-rslave dev
+mount --bind /run run
+mount --make-slave run
 ```
 
 Chroot:
 
 ```
-chroot /mnt/gentoo /bin/bash
+chroot . /bin/bash
 source /etc/profile
-export PS1="(chroot) ${PS1}
+```
+
+```
 mkdir -p /var/tmp/portage && mount -t tmpfs -o size=12G,nodev,nosuid,noatime tmpfs /var/tmp/portage
-emerge-webrsync
-emerge --sync --quiet
-```
-
-Select profile:
-
-```
-eselect profile list
-eselect profile set 3
-```
-
-Because as of now, circular dependency happens between tiff and webp, temporarily disable webp and tiff for now:
-
-```
-USE="-webp" emerge -1v media-libs/tiff
-```
-
-And install base system:
-
-```
-emerge -vauDN @world
-```
-
-Install text editor for easier time (I love nvim):
-
-```
-emerge -q neovim
 ```
 
 Set up timezone:
@@ -137,7 +114,7 @@ ln -sf ../usr/share/zoneinfo/Asia/Ho_Chi_Minh /etc/localtime
 Set up locale:
 
 ```
-nvim /etc/locale.gen
+echo "en_US.UTF-8 UTF-8" >> /etc/locale.gen
 ```
 
 Uncomment en_US then:
@@ -154,7 +131,38 @@ eselect locale list
 
 ```
 eselect locale set 4
-env-update && source /etc/profile && export PS1="(chroot) ${PS1}"
+env-update && source /etc/profile
+```
+
+```
+emerge-webrsync
+emerge --sync
+```
+
+Select profile (desktop stable):
+
+```
+eselect profile list
+eselect profile set 3
+```
+
+Because as of now, circular dependency happens between tiff and webp, temporarily disable webp and tiff for now:
+
+```
+USE="-webp" emerge -1v media-libs/tiff
+USE="-truetype" emerge --quiet --oneshot dev-python/pillow
+```
+
+And install base system:
+
+```
+emerge -vauDN @world
+```
+
+Install text editor for easier time (I love nvim):
+
+```
+emerge -q neovim
 ```
 
 ## Install the kernel
@@ -173,6 +181,7 @@ emerge -q sys-kernel/linux-firmware sys-firmware/sof-firmware sys-kernel/install
 ```
 
 ## Generate fstab
+
 Set up fstab:
 
 ```
@@ -182,6 +191,7 @@ echo "tmpfs /var/tmp/portage tmpfs size=12G,nodev,nosuid,noatime 0 0" >> /etc/fs
 ```
 
 ## User related
+
 Setup hostname:
 
 ```
