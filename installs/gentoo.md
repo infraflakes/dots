@@ -170,6 +170,11 @@ emerge -vauDN @world
 Group license compliance for firmware and define the kernel layout infrastructure explicitly:
 
 ```bash
+mkdir -p /etc/kernel/preinst.d
+touch /etc/kernel/preinst.d/05-check-chroot.install
+```
+
+```bash
 mkdir -p /etc/portage/package.license
 echo "sys-kernel/linux-firmware @BINARY-REDISTRIBUTABLE" > /etc/portage/package.license/firmware
 echo "sys-kernel/installkernel dracut" > /etc/portage/package.use/kernel
