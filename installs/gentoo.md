@@ -66,10 +66,12 @@ EMERGE_DEFAULT_OPTS="${EMERGE_DEFAULT_OPTS} --usepkg=y --getbinpkg=y --binpkg-re
 FEATURES="${FEATURES} getbinpkg"
 BINPKG_FORMAT="gpkg"
 MAKEOPTS="-j16 -l14"
-USE="X alsa pipewire sound-server pulseaudio elogind fcitx5 dbus -systemd -gnome -kde -wayland -aqua -coreaudio -cups -dvd -dvdr -cdr -emboss -doc -test -man -handbook -examples -gtk-doc -vala -nls -semantic-desktop -geolocation"
+USE="nftables X alsa pipewire sound-server opus pulseaudio elogind fcitx5 dbus -systemd -gnome -kde -wayland -aqua -coreaudio -cups -dvd -dvdr -cdr -emboss -doc -test -man -handbook -examples -gtk-doc -vala -nls -semantic-desktop -geolocation"
 
-# Video Drivers:
-VIDEO_CARDS="iris nvidia"
+# X11:
+ACCEPT_LICENSE="* -@EULA NVIDIA-r1"
+VIDEO_CARDS="intel nvidia"
+INPUT_DEVICES="libinput"
 
 # CPU Specific Flags: 
 # You can generate the exact string later using 'app-portage/cpuid2cpuflags'
@@ -166,6 +168,7 @@ Install text editor for easier time (I love nvim):
 
 ```
 emerge -q neovim
+emerge --sync
 ```
 
 ## Install the kernel
@@ -211,13 +214,25 @@ nvim /etc/hosts
 ::1             localhost serein
 ```
 
-Set up network:
+Set up user session stuff:
 
-```
+```bash
 echo "net-misc/networkmanager -iwd wifi" >> /etc/portage/package.use/networkmanager
-emerge -q networkmanager wpa_supplicant
-rc-update add NetworkManager default
+echo -e "media-video/pipewire sound-server pipewire-alsa pulseaudio\nmedia-sound/pulseaudio -daemon" >> /etc/portage/package.use/audio
+echo "app-i18n/fcitx-unikey ~amd64" >> /etc/portage/package.accept_keywords/fcitx-unikey
 ```
+
+```bash
+emerge -q networkmanager wpa_supplicant sys-apps/dbus elogind dev-vcs/git fastfetch media-video/pipewire media-video/wireplumber sys-auth/polkit x11-base/xorg-drivers x11-drivers/nvidia-drivers x11-base/xorg-server x11-apps/xrandr xdg-utils cwm flameshot slock x11-misc/xclip xdg-desktop-portal-gtk fcitx fcitx-configtool fcitx-gtk fcitx-unikey
+```
+
+```bash
+rc-update add NetworkManager default
+rc-update add dbus default
+rc-update add elogind boot
+```
+
+( You can launch audio with `gentoo-pipewire-launcher` script)
 
 Set root password:
 
@@ -228,24 +243,37 @@ passwd
 Set user:
 
 ```
-useradd -mG wheel,users,audio,video,portage,input,kvm -s /bin/bash nixuris
+useradd -mG wheel,users,audio,video,render,portage,input,kvm -s /bin/bash nixuris
 passwd nixuris
 ```
 
-Set up doas:
+Set up other tools:
+
+```bash
+echo "media-video/obs-studio ~amd64" >> /etc/portage/package.accept_keywords/obs
+```
 
 ```
-emerge -q doas
+emerge -q doas light sys-apps/lm-sensors playerctl app-containers/podman pulsemixer tailscale p7zip unrar unzip zip imv mpv obs-studio firefox-bin fish
 echo "permit persist keepenv :wheel" > /etc/doas.conf
+chsh -s $(which fish)
+su nixuris
+chsh -s $(which fish)
 ```
 
 Set up GRUB:
 
 ```
 echo 'GRUB_PLATFORMS="efi-64"' >> /etc/portage/make.conf
-emerge -q sys-boot/grub efibootmgr fastfetch
+emerge -q sys-boot/grub efibootmgr
 grub-install --efi-directory=/boot
 grub-mkconfig -o /boot/grub/grub.cfg
+```
+
+Add this to /etc/default/grub:
+
+```
+GRUB_CMDLINE_LINUX_DEFAULT="quiet splash nvidia-drm.modeset=1"
 ```
 
 Exit chroot:
@@ -253,4 +281,21 @@ Exit chroot:
 ```
 exit
 umount -R /mnt/gentoo
+```
+
+GURU PKGS:
+
+```bash
+app-eselect/eselect-repository
+```
+```bash
+eselect repository enable guru
+emaint sync -r guru
+```
+```bash
+echo '*/*::guru ~amd64' > /etc/portage/package.accept_keywords/guru
+```
+
+```bash
+emerge -q yazi bluetuith
 ```

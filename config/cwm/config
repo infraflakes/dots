@@ -35,12 +35,6 @@ command music    "pear-desktop"
 command vesktop    "vesktop"
 command monitor    "ghostty -e btm"
 command screenshot    "flameshot gui"
-command clipboard    "copyq show"
-command "-------------" "true"
-command suspend    "suspend.sh"
-command reboot     "reboot"
-command shutdown   "shutdown -P now"
-
 
 bind-key 4-q         window-close
 bind-key M-Tab window-cycle
