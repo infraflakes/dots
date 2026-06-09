@@ -65,6 +65,7 @@ EMERGE_DEFAULT_OPTS="--verbose --ask --update --deep --newuse"
 EMERGE_DEFAULT_OPTS="${EMERGE_DEFAULT_OPTS} --usepkg=y --getbinpkg=y --binpkg-respect-use=y"
 FEATURES="${FEATURES} getbinpkg"
 BINPKG_FORMAT="gpkg"
+
 MAKEOPTS="-j16 -l14"
 USE="mount nftables X alsa pipewire sound-server opus pulseaudio elogind fcitx5 dbus -systemd -gnome -kde -wayland -aqua -coreaudio -cups -dvd -dvdr -cdr -emboss -doc -test -man -handbook -examples -gtk-doc -vala -nls -semantic-desktop -geolocation"
 
@@ -211,7 +212,7 @@ emerge -q sys-kernel/linux-firmware sys-firmware/sof-firmware sys-kernel/install
 Set up user session stuff:
 
 ```bash
-emerge -q networkmanager wpa_supplicant sys-apps/dbus elogind dev-vcs/git fastfetch media-video/pipewire media-video/wireplumber sys-auth/polkit x11-base/xorg-drivers x11-drivers/nvidia-drivers x11-base/xorg-server x11-apps/xrandr xsetroot xdg-utils dmenu spectrwm flameshot slock x11-misc/xclip xdg-desktop-portal-gtk fcitx fcitx-configtool fcitx-gtk fcitx-unikey doas light sys-apps/lm-sensors playerctl app-containers/podman pulsemixer tailscale p7zip unrar unzip zip imv mpv obs-studio firefox-bin fish ghostty sys-boot/grub os-prober efibootmgr bat bottom fd fzf ncdu ripgrep stow tmux noto noto-cjk noto-emoji jetbrains-mono symbols-nerd-font flatpak power-profiles-daemon gamescope
+emerge -q networkmanager wpa_supplicant sys-apps/dbus elogind dev-vcs/git fastfetch media-video/pipewire media-video/wireplumber sys-auth/polkit x11-base/xorg-drivers x11-drivers/nvidia-drivers x11-base/xorg-server x11-apps/xrandr xsetroot xdg-utils dmenu spectrwm flameshot slock x11-misc/xclip xdg-desktop-portal-gtk fcitx fcitx-configtool fcitx-gtk fcitx-unikey doas light sys-apps/lm-sensors playerctl app-containers/podman pulsemixer tailscale p7zip unrar unzip zip imv mpv obs-studio firefox-bin fish kitty sys-boot/grub os-prober efibootmgr bat bottom fd fzf ncdu ripgrep stow tmux noto noto-cjk noto-emoji jetbrains-mono symbols-nerd-font flatpak power-profiles-daemon
 ```
 
 ```bash
@@ -324,6 +325,13 @@ doas emerge -q yazi bluetuith vesktop-bin
 ```
 
 # Others
+
+Steam:
+
+```bash
+flatpak install --user flathub com.valvesoftware.Steam
+flatpak install --user flathub org.freedesktop.Platform.VulkanLayer.MangoHud
+```
 
 sutils:
 
