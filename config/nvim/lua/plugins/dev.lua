@@ -85,23 +85,6 @@ return {
   },
 
   {
-    "neovim/nvim-lspconfig",
-    event = { "BufReadPre", "BufNewFile" },
-    config = function()
-      local capabilities = require("cmp_nvim_lsp").default_capabilities()
-
-      vim.lsp.config("*", {
-        capabilities = capabilities,
-      })
-
-      local servers = { "rust_analyzer", "nil_ls", "ts_ls", "zls", "svelte" }
-      for _, server in ipairs(servers) do
-        vim.lsp.enable(server)
-      end
-    end,
-  },
-
-  {
     "hrsh7th/nvim-cmp",
     event = "InsertEnter", -- Lazy load on insert
     dependencies = {

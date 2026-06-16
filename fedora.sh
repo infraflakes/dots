@@ -1,0 +1,31 @@
+#!/usr/bin/env sh
+
+# Exit on unset variables
+set -u
+
+LOG_FILE="$HOME/.local/state/pkg_install.log"
+mkdir -p "$(dirname "$LOG_FILE")"
+
+# Package Categorization
+sudo dnf copr enable scottames/ghostty -y
+sudo dnf copr enable atim/bottom -y
+sudo dnf copr enable lihaohong/yazi -y
+DEV_CORE="neovim"
+SYS_HW="lm_sensors tailscale"
+CLI_UTIL="bat bottom fastfetch fd fzf ncdu ripgrep stow tmux yazi"
+ARCHIVES="p7zip unrar"
+INPUT_FONT="fcitx5 fcitx5-configtool fcitx5-gtk fcitx5-unikey google-noto-fonts-all"
+MEDIA_GAME="gamescope mangohud steam imv mpv obs-studio"
+
+# Merge all into one master list
+ALL_PKGS="$SYS_HW $CLI_UTIL $ARCHIVES $DEV_CORE $INPUT_FONT $MEDIA_GAME"
+
+# Execution & Logging
+echo "[INFO] Starting installation at $(date)" >> "$LOG_FILE"
+
+if sudo dnf install -y $ALL_PKGS 2>> "$LOG_FILE"; then
+    echo "[SUCCESS] All packages checked/installed successfully." | tee -a "$LOG_FILE"
+else
+    echo "[ERROR] DNF encountered an error. Check $LOG_FILE for details." >&2
+    exit 1
+fi
