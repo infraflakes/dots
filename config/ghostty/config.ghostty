@@ -10,3 +10,7 @@ clipboard-read = allow
 clipboard-write = allow
 theme = TokyoNight
 window-decoration = server
+
+keybind = ctrl+plus=increase_font_size:1
+keybind = ctrl+shift+plus=increase_font_size:1
+keybind = ctrl+minus=decrease_font_size:1
