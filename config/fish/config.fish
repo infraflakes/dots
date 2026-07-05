@@ -18,8 +18,8 @@ set -gx XDG_VIDEOS_DIR "$HOME"'/Videos'
 
 set -q PATH; or set -g PATH # Ensure it exists
 set -gx PATH "$HOME/.local/bin" $PATH
+set -gx PATH "$HOME/.config/swm/bin" $PATH
 set -gx PATH "$HOME/.cargo/bin" $PATH
-set -gx PATH "$HOME/.config/emacs/bin" $PATH
 
 set UID (id -u)
 set -g fish_color_command 8ab4f8 --bold
@@ -47,3 +47,6 @@ status is-interactive; and begin
     echo "				Welcome back, $USER!"
 
 end
+
+# opencode
+fish_add_path /home/nixuris/.opencode/bin

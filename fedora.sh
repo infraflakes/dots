@@ -13,14 +13,15 @@ sudo dnf copr enable lihaohong/yazi -y
 sudo dnf copr enable lukenukem/asus-linux -y
 sudo dnf copr enable @xlibre/xlibre-xserver -y
 DEV_CORE="neovim"
-SYS_HW="lm_sensors tailscale supergfxctl xlibre-xserver xlibre-xf86-input-libinput libX11-devel libXft-devel libXinerama-devel"
+SYS_HW="lm_sensors tailscale supergfxctl NetworkManager-tui pavucontrol"
+WM="xlibre-xserver xlibre-xf86-input-libinput libX11-devel libXft-devel libXinerama-devel dmenu slock arandr xset maim xclip feh"
 CLI_UTIL="bat bottom fastfetch fd fzf ncdu ripgrep stow tmux yazi"
 ARCHIVES="p7zip unrar"
 INPUT_FONT="fcitx5 fcitx5-configtool fcitx5-gtk fcitx5-unikey google-noto-fonts-all"
-MEDIA_GAME="gamescope mangohud steam imv mpv obs-studio"
+MEDIA_GAME="gamescope mangohud steam lutris imv mpv obs-studio"
 
 # Merge all into one master list
-ALL_PKGS="$SYS_HW $CLI_UTIL $ARCHIVES $DEV_CORE $INPUT_FONT $MEDIA_GAME"
+ALL_PKGS="$SYS_HW $CLI_UTIL $ARCHIVES $DEV_CORE $INPUT_FONT $MEDIA_GAME $WM"
 
 # Execution & Logging
 echo "[INFO] Starting installation at $(date)" >> "$LOG_FILE"
