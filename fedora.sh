@@ -10,8 +10,10 @@ mkdir -p "$(dirname "$LOG_FILE")"
 sudo dnf copr enable scottames/ghostty -y
 sudo dnf copr enable atim/bottom -y
 sudo dnf copr enable lihaohong/yazi -y
+sudo dnf copr enable lukenukem/asus-linux -y
+sudo dnf copr enable @xlibre/xlibre-xserver -y
 DEV_CORE="neovim"
-SYS_HW="lm_sensors tailscale"
+SYS_HW="lm_sensors tailscale supergfxctl xlibre-xserver xlibre-xf86-input-libinput libX11-devel libXft-devel libXinerama-devel"
 CLI_UTIL="bat bottom fastfetch fd fzf ncdu ripgrep stow tmux yazi"
 ARCHIVES="p7zip unrar"
 INPUT_FONT="fcitx5 fcitx5-configtool fcitx5-gtk fcitx5-unikey google-noto-fonts-all"
