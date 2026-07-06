@@ -18,7 +18,7 @@ WM="xlibre-xserver xlibre-xf86-input-libinput libX11-devel libXft-devel libXiner
 CLI_UTIL="bat bottom fastfetch fd fzf ncdu ripgrep stow tmux yazi"
 ARCHIVES="p7zip unrar"
 INPUT_FONT="fcitx5 fcitx5-configtool fcitx5-gtk fcitx5-unikey google-noto-fonts-all"
-MEDIA_GAME="gamescope mangohud steam lutris imv mpv obs-studio"
+MEDIA_GAME="gamescope mangohud steam lutris imv mpv obs-studio" # launch games with `gamescope --mangoapp -W 1920 -H 1080 -r 144 -f -- %command%`
 
 # Merge all into one master list
 ALL_PKGS="$SYS_HW $CLI_UTIL $ARCHIVES $DEV_CORE $INPUT_FONT $MEDIA_GAME $WM"
