@@ -49,6 +49,10 @@ end
 status is-interactive; and begin
 
     ssh_agent
+    if type -q direnv
+      direnv hook fish | source
+    end
+
 
     alias cd scd
     alias e nvim
