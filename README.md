@@ -1,10 +1,5 @@
-## Personal installation steps
-
-[Gentoo](./installs/gentoo.md)
-
-## Symlinking dots
+## Personal dots
 
 ```bash
-stow -t ~/.config config
-stow -t ~/.local/bin bin
+curl --proto '=https' --tlsv1.2 -sSf -L https://install.determinate.systems/nix | sh -s -- install
 ```
