@@ -12,7 +12,7 @@ sudo dnf copr enable lihaohong/yazi -y
 sudo dnf copr enable lukenukem/asus-linux -y
 sudo dnf copr enable @xlibre/xlibre-xserver -y
 sudo dnf copr enable lxdes/bluetuith -y
-UTILS="openssh lm_sensors tailscale supergfxctl NetworkManager-tui bluetuith tuned"
+UTILS="git shadow-utils tailscale supergfxctl tuned"
 WM="xlibre-xserver xlibre-xf86-input-libinput xdg-desktop-portal xdg-desktop-portal-gtk slock arandr xset xsetroot maim xclip feh brightnessctl"
 IME="fcitx5 fcitx5-configtool fcitx5-gtk fcitx5-unikey"
 MEDIA_GAME="gamescope mangohud steam lutris imv mpv obs-studio firefox" # launch games with `gamescope --mangoapp -W 1920 -H 1080 -r 144 -f -- %command%`
