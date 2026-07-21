@@ -211,7 +211,7 @@ emerge -q sys-kernel/linux-firmware sys-firmware/sof-firmware sys-kernel/install
 Set up user session stuff:
 
 ```bash
-emerge -q networkmanager wpa_supplicant sys-apps/dbus elogind dev-vcs/git media-video/pipewire media-video/wireplumber sys-auth/polkit x11-base/xorg-drivers x11-drivers/nvidia-drivers x11-base/xorg-server x11-apps/xrandr xsetroot xdg-utils slock x11-misc/xclip xdg-desktop-portal-gtk fcitx fcitx-configtool fcitx-gtk fcitx-unikey doas light pulsemixer tailscale unzip zip imv mpv obs-studio fish sys-boot/grub os-prober efibootmgr flatpak power-profiles-daemon
+emerge -q networkmanager wpa_supplicant sys-apps/dbus elogind dev-vcs/git media-video/pipewire media-video/wireplumber sys-auth/polkit x11-base/xorg-drivers x11-drivers/nvidia-drivers x11-base/xorg-server xdg-utils xdg-desktop-portal-gtk fcitx-gtk doas light tailscale unzip zip imv mpv obs-studio fish sys-boot/grub os-prober efibootmgr flatpak power-profiles-daemon
 ```
 
 ```bash
