@@ -32,17 +32,11 @@ fish_add_path $HOME/.config/swm/bin
 fish_add_path $HOME/.opencode/bin
 fish_add_path $GOPATH/bin
 
-# Commands (Flexoki Black)
-set -g fish_color_command 100f0f --bold
-# Parameters (Base-600 / Dark Gray for contrast)
-set -g fish_color_param 6f6e69 --bold
-# Redirections (Flexoki Black)
-set -g fish_color_redirection 100f0f --bold
-# Errors (Flexoki Red)
-set -g fish_color_error af3029 --bold
-# Autosuggestions (Base-300 / Muted Gray)
-set -g fish_color_autosuggestion b7b5ac --bold
-# Selection (Reverse video)
+set -g fish_color_command 8ab4f8 --bold
+set -g fish_color_param ccd0d9 --bold
+set -g fish_color_redirection 8ab4f8 --bold
+set -g fish_color_error cf6679 --bold
+set -g fish_color_autosuggestion 908caa --bold
 set -g fish_color_selection --reverse --bold
 
 status is-login; and begin
