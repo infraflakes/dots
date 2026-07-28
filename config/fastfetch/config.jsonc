@@ -3,11 +3,12 @@
     "separator": " "
   },
   "logo": {
+    "type": "none",
     "padding": {
       "right": 6,
       "top": 2
     },
-    "source": "~/.config/fastfetch/assets/fedora.txt"
+    "source": "~/.config/fastfetch/assets/nix.txt"
   },
   "modules": [
     "break",

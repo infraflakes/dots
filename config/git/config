@@ -1,18 +1,19 @@
 [color "diff"]
-meta = blue
 frag = brightyellow
-old = red
+meta = blue
 new = green
+old = red
 
-[diff]
-algorithm = histogram
-compactionHeuristic = true
+[diff-so-fancy]
+
+[interactive]
+diffFilter = diff-so-fancy --patch
 
 [pager]
-diff = "less --tabs=4 -RFX"
-log = "less --tabs=4 -RFX"
-show = "less --tabs=4 -RFX"
+diff = diff-so-fancy | less --tabs=4 -RFX
+log = diff-so-fancy | less --tabs=4 -RFX
+show = diff-so-fancy | less --tabs=4 -RFX
 
 [user]
-email = infraflakes@proton.me
 name = infraflakes
+email = infraflakes@proton.me

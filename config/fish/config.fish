@@ -32,9 +32,7 @@ fish_add_path $HOME/.config/swm/bin
 fish_add_path $HOME/.opencode/bin
 fish_add_path $GOPATH/bin
 
-set -g fish_color_command 8ab4f8 --bold
-set -g fish_color_param ccd0d9 --bold
-set -g fish_color_redirection 8ab4f8 --bold
+set -g fish_color_param 879A39 --bold
 set -g fish_color_error cf6679 --bold
 set -g fish_color_autosuggestion 908caa --bold
 set -g fish_color_selection --reverse --bold
@@ -55,6 +53,8 @@ status is-interactive; and begin
 
     alias cd scd
     alias e nvim
+    alias vi nvim
+    alias vim nvim
     alias ls 'command ls --color=never'
     alias tm 'tmux new-session -A -s default'
 
