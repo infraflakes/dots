@@ -3,15 +3,15 @@ set UID (id -u)
 # set -gx NOUVEAU_USE_ZINK '1'
 # set -gx DRI_PRIME '1'
 
-set -gx EDITOR 'nvim'
-set -gx VISUAL 'nvim'
+set -gx EDITOR hx
+set -gx VISUAL hx
 
-set -gx SDL_IM_MODULE 'fcitx'
+set -gx SDL_IM_MODULE fcitx
 set -gx XMODIFIERS '@im=fcitx'
-set -gx GTK_IM_MODULE 'fcitx'
-set -gx QT_IM_MODULE 'fcitx'
+set -gx GTK_IM_MODULE fcitx
+set -gx QT_IM_MODULE fcitx
 
-set -gx TMUX_TMPDIR '/tmp'
+set -gx TMUX_TMPDIR /tmp
 set -gx GOPATH $HOME/.local/share/go
 
 set -gx XDG_CACHE_HOME "$HOME"'/.cache'
@@ -44,18 +44,14 @@ end
 status is-interactive; and begin
 
     if type -q direnv
-      direnv hook fish | source
+        direnv hook fish | source
     end
     if test -e ~/.nix-profile/etc/profile.d/nix.fish
         source ~/.nix-profile/etc/profile.d/nix.fish
     end
 
-
     alias cd scd
-    alias e nvim
-    alias vi nvim
-    alias vim nvim
-    alias ls 'command ls --color=never'
+    alias e hx
     alias tm 'tmux new-session -A -s default'
 
     sn cd init fish | source
