@@ -1,4 +1,5 @@
 set UID (id -u)
+fish_vi_key_bindings
 
 # set -gx NOUVEAU_USE_ZINK '1'
 # set -gx DRI_PRIME '1'
