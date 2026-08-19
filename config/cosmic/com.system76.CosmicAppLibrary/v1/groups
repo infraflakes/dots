@@ -1,0 +1,23 @@
+[
+    (
+        name: "Trash",
+        icon: "folder-symbolic",
+        filter: AppIds([
+            "iamb",
+            "mpv",
+            "org.fcitx.fcitx5-migrator",
+            "fcitx5-configtool",
+            "arandr",
+            "bottom",
+            "yazi",
+            "xterm",
+            "nixos-manual",
+            "htop",
+            "kbd-layout-viewer5",
+            "org.gnome.Nautilus",
+            "Helix",
+            "com.system76.CosmicScreenshot",
+            "nm-connection-editor",
+        ]),
+    ),
+]
