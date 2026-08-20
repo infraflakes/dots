@@ -2,10 +2,8 @@
     (
         modifiers: [
             Super,
-            Shift,
         ],
-        key: "s",
-    ): System(Screenshot),
+    ): Disable,
     (
         modifiers: [
             Super,
@@ -19,8 +17,21 @@
     (
         modifiers: [
             Super,
+            Shift,
+        ],
+        key: "s",
+    ): System(Screenshot),
+    (
+        modifiers: [
+            Super,
         ],
         key: "Return",
         description: Some("Terminal"),
     ): Spawn("ghostty"),
+    (
+        modifiers: [
+            Super,
+        ],
+        key: "space",
+    ): System(Launcher),
 }

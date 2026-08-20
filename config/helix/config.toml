@@ -1,1 +1,5 @@
 theme = "tokyonight_moon"
+[keys.normal]
+";" = "command_mode"
+[editor]
+file-picker.hidden = false 
