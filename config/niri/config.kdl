@@ -52,10 +52,6 @@ layout {
         inactive-color "#505050"
     }
 }
-layer-rule {
-    match namespace="^quickshell$"
-    place-within-backdrop true
-}
 window-rule {
     match app-id="firefox$" title="^Picture-in-Picture$"
     open-floating true
@@ -67,8 +63,6 @@ window-rule {
 window-rule {
     geometry-corner-radius 10
     clip-to-geometry true
-}
-window-rule {
     shadow {
         off
         draw-behind-window true
@@ -86,7 +80,7 @@ spawn-at-startup "fcitx5"
 spawn-at-startup "dms run"
 binds {
     XF86AudioMicMute allow-when-locked=true {
-        spawn "dms" "ipc" "call" "audio" "micmute"
+        spawn "wpctl" "set-mute" "@DEFAULT_AUDIO_SOURCE@" "toggle"
     }
     XF86AudioRaiseVolume {
         spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "0.05+"
