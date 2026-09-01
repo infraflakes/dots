@@ -3,7 +3,7 @@ cursor {
     xcursor-size 24
 }
 prefer-no-csd
-screenshot-path "~/Pictures/Screenshots/Screenshot from %Y-%m-%d %H-%M-%S.png"
+screenshot-path "~/Pictures/Screenshots/Screenshot_%Y-%m-%d_%H-%M-%S.png"
 hotkey-overlay {
     skip-at-startup
 }
@@ -77,7 +77,11 @@ environment {
     MOZ_ENABLE_WAYLAND "1"
 }
 spawn-at-startup "fcitx5"
-spawn-at-startup "dms run"
+spawn-at-startup "awww-daemon"
+layer-rule {
+    match namespace="^awww-daemon$"
+    place-within-backdrop true
+}
 binds {
     XF86AudioMicMute allow-when-locked=true {
         spawn "wpctl" "set-mute" "@DEFAULT_AUDIO_SOURCE@" "toggle"
@@ -97,11 +101,11 @@ binds {
     XF86MonBrightnessDown allow-when-locked=true {
         spawn "brightnessctl" "set" "10%-"
     }
-    Mod+Space hotkey-overlay-title="Run an Application" {
-        spawn "dms" "ipc" "spotlight" "toggle"
+    Mod+Backspace hotkey-overlay-title="Lockscreen" {
+        spawn "swaylock"
     }
-    Mod+V hotkey-overlay-title="Clipboard Manager" {
-        spawn "dms" "ipc" "clipboard" "toggle"
+    Mod+Space hotkey-overlay-title="Run an Application" {
+        spawn "tofi-drun"
     }
     Mod+Return hotkey-overlay-title="Open a Terminal: ghostty" {
         spawn "ghostty"
@@ -115,52 +119,40 @@ binds {
     Mod+Shift+W {
         toggle-window-floating
     }
-    Mod+Left {
-        focus-column-left
-    }
-    Alt+Down {
+    Alt+J {
         focus-window-down
     }
-    Alt+Up {
+    Alt+K {
         focus-window-up
     }
-    Mod+Right {
-        focus-column-right
-    }
-    Mod+Ctrl+Left {
+    Mod+Ctrl+H {
         consume-or-expel-window-left
     }
-    Mod+Ctrl+Right {
+    Mod+Ctrl+L {
         consume-or-expel-window-right
     }
-    Mod+Down {
+    Mod+J {
         focus-workspace-down
     }
-    Mod+Up {
+    Mod+K {
         focus-workspace-up
     }
-    Mod+WheelScrollDown cooldown-ms=150 {
-        focus-workspace-down
+    Mod+L {
+        focus-column-right
     }
-    Mod+WheelScrollUp cooldown-ms=150 {
-        focus-workspace-up
+    Mod+H {
+        focus-column-left
     }
-    Mod+Ctrl+Down {
+    Mod+Ctrl+J {
         move-column-to-workspace-down
     }
-    Mod+Ctrl+Up {
+    Mod+Ctrl+K {
         move-column-to-workspace-up
     }
-    Mod+Ctrl+WheelScrollDown cooldown-ms=150 {
-        move-column-to-workspace-down
-    }
-    Mod+Ctrl+WheelScrollUp cooldown-ms=150 {
-        move-column-to-workspace-up
-    }
-    Mod+Alt+Down {
+    Mod+Alt+J {
         move-workspace-down
     }
-    Mod+Alt+Up {
+    Mod+Alt+K {
         move-workspace-up
     }
     Mod+F {
@@ -169,16 +161,16 @@ binds {
     Mod+Shift+F {
         fullscreen-window
     }
-    Mod+Shift+Left {
+    Mod+Shift+H {
         set-column-width "-10%"
     }
-    Mod+Shift+Right {
+    Mod+Shift+L {
         set-column-width "+10%"
     }
-    Mod+Shift+Up {
+    Mod+Shift+K {
         set-window-height "-10%"
     }
-    Mod+Shift+Down {
+    Mod+Shift+J {
         set-window-height "+10%"
     }
     Mod+Shift+S {
@@ -187,7 +179,19 @@ binds {
     Mod+Alt+S {
         screenshot-screen
     }
-    Alt+Print {
+    Mod+Ctrl+S {
         screenshot-window
+    }
+    Mod+WheelScrollDown cooldown-ms=150 {
+        focus-workspace-down
+    }
+    Mod+WheelScrollUp cooldown-ms=150 {
+        focus-workspace-up
+    }
+    Mod+Ctrl+WheelScrollDown cooldown-ms=150 {
+        move-column-to-workspace-down
+    }
+    Mod+Ctrl+WheelScrollUp cooldown-ms=150 {
+        move-column-to-workspace-up
     }
 }
