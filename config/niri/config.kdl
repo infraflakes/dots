@@ -30,7 +30,7 @@ input {
 output "eDP-1" {
     variable-refresh-rate on-demand=true
     mode "1920x1080@144.000"
-    scale 1
+    scale 1.15
     transform "normal"
     position x=0 y=0
 }
@@ -105,7 +105,7 @@ binds {
         spawn "swaylock"
     }
     Mod+Space hotkey-overlay-title="Run an Application" {
-        spawn "tofi-drun"
+        spawn "tofi-drun" "--drun-launch=true"
     }
     Mod+Return hotkey-overlay-title="Open a Terminal: ghostty" {
         spawn "ghostty"

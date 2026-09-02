@@ -88,8 +88,7 @@ vim /etc/portage/package.accept_keywords
 ```
 media-video/obs-studio ~amd64
 app-i18n/fcitx-unikey ~amd64
-gui-wm/gamescope ~amd64
-media-libs/vkroots ~amd64
+gui-apps/tofi ~amd64
 ```
 
 ```bash
@@ -211,7 +210,7 @@ emerge -q sys-kernel/linux-firmware sys-firmware/sof-firmware sys-kernel/install
 Set up user session stuff:
 
 ```bash
-emerge -q networkmanager wpa_supplicant sys-apps/dbus elogind dev-vcs/git media-video/pipewire media-video/wireplumber sys-auth/polkit x11-base/xorg-drivers x11-drivers/nvidia-drivers x11-base/xorg-server xdg-utils xdg-desktop-portal-gtk fcitx-gtk doas light tailscale unzip zip imv mpv obs-studio fish sys-boot/grub os-prober efibootmgr flatpak power-profiles-daemon
+emerge -q networkmanager wpa_supplicant sys-apps/dbus elogind dev-vcs/git fastfetch media-video/pipewire media-video/wireplumber sys-auth/polkit xdg-utils xdg-desktop-portal-gtk xdg-desktop-portal-gnome swaylock fcitx fcitx-configtool fcitx-gtk fcitx-unikey doas light sys-apps/lm-sensors app-containers/podman pulsemixer tailscale p7zip unrar unzip zip imv mpv obs-studio firefox-bin fish ghostty sys-boot/grub os-prober efibootmgr bat bottom fd fzf ncdu ripgrep stow tmux noto noto-cjk noto-emoji jetbrains-mono symbols-nerd-font flatpak power-profiles-daemon
 ```
 
 ```bash
@@ -309,6 +308,18 @@ doas rc-update add tailscale default
 doas rc-update add bluetooth default
 ```
 
+# GURU
+
+```bash
+doas emerge -q app-eselect/eselect-repository
+doas eselect repository enable guru
+doas emaint sync -r guru
+```
+
+```bash
+doas emerge -q yazi bluetuith gui-wm/niri awww gui-apps/tofi
+```
+
 # Others
 
 Steam:
@@ -316,19 +327,4 @@ Steam:
 ```bash
 flatpak install --user flathub com.valvesoftware.Steam
 flatpak install --user flathub org.freedesktop.Platform.VulkanLayer.MangoHud
-```
-
-sutils:
-
-```bash
-curl -fsSL https://raw.githubusercontent.com/infraflakes/sutils/main/install.sh -o install.sh
-chmod +x install.sh
-./install.sh
-```
-
-nixenv:
-
-```bash
-curl -sSL "https://raw.githubusercontent.com/infraflakes/nixenv/main/nixenv" -o ~/.local/bin/nixenv
-chmod +x ~/.local/bin/nixenv
 ```
