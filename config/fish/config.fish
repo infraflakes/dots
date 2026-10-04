@@ -1,5 +1,9 @@
 set UID (id -u)
-# fish_vi_key_bindings
+fish_vi_key_bindings
+function fish_user_key_bindings
+    # Bind Ctrl+O in insert mode to switch to default (normal) mode and refresh the UI
+    bind -M insert -m default \co backward-char force-repaint
+end
 
 # set -gx NOUVEAU_USE_ZINK '1'
 # set -gx DRI_PRIME '1'
