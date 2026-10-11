@@ -38,7 +38,7 @@ fish_add_path $HOME/.local/bin
 fish_add_path $HOME/.cargo/bin
 fish_add_path $HOME/.config/swm/bin
 fish_add_path $HOME/.opencode/bin
-fish_add_path $GOPATH/bin
+fish_add_path $HOME/.local/share/go/bin
 
 set -g fish_color_param 879A39 --bold
 set -g fish_color_error cf6679 --bold
