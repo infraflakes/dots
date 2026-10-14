@@ -1,9 +1,0 @@
-[color "diff"]
-frag = brightyellow
-meta = blue
-new = green
-old = red
-
-[user]
-name = infraflakes
-email = infraflakes@proton.me
