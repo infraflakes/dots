@@ -4,16 +4,6 @@ meta = blue
 new = green
 old = red
 
-[diff-so-fancy]
-
-[interactive]
-diffFilter = diff-so-fancy --patch
-
-[pager]
-diff = diff-so-fancy | less --tabs=4 -RFX
-log = diff-so-fancy | less --tabs=4 -RFX
-show = diff-so-fancy | less --tabs=4 -RFX
-
 [user]
 name = infraflakes
 email = infraflakes@proton.me
